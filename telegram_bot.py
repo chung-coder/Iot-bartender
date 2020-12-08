@@ -44,7 +44,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def main():
 
     updater = Updater(
-        "1202208172:AAFdfP6gj-fgaRVO3t6nhvek7B7mXQPOMZQ", use_context=True)
+        "my-token", use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
