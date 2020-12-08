@@ -66,6 +66,8 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
     
     b.	[相關使用手冊](https://www.waveshare.net/w/upload/9/95/Barcode_Scanner_Module_Quick_Start_cn.pdf)
     
+    c.[利用 Web Cam 來讀取條碼](https://atceiling.blogspot.com/2017/03/raspberry-pi-zbar.html )
+    
 3.	如何實作2FA  (Two-factor authentication)
 - Telegram Bot - Age Classification
 
