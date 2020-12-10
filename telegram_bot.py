@@ -13,8 +13,6 @@ def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [
             InlineKeyboardButton("成熟的大人 - 米咖儂", callback_data='成熟的大人 - 米咖儂'),
-            #InlineKeyboardButton("米蔓天使 - 米蔓", callback_data='米蔓天使 - 米蔓'),
-            #InlineKeyboardButton("少女心 - 米美雪", callback_data='少女心 - 米美雪'),
         ],
         [
             InlineKeyboardButton("米蔓天使 - 米蔓", callback_data='米蔓天使 - 米蔓'),
