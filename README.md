@@ -86,6 +86,17 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 4.	Telegram Bot UI設計
 ![](https://i.imgur.com/n2v5UWo.png)
 
+## Implement
+- telegram bot
+    - using [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+    - 基本設定
+        - [參考文件](https://ithelp.ithome.com.tw/articles/10245264)
+    - keyboard
+        - [ReplyKeyboardMarkup](https://ithelp.ithome.com.tw/m/articles/10247929)
+        - [Inline keyboard&callback_query](https://ithelp.ithome.com.tw/m/articles/10248455)
+    - Python Telegram Bot 教學
+        - [參考文件](https://hackmd.io/@truckski/HkgaMUc24?type=view#Python-Telegram-Bot-%E6%95%99%E5%AD%B8-by-%E9%99%B3%E9%81%94%E4%BB%81)
+
 ## Plan B
 AI bartender with customization bartending
 ### Overview
