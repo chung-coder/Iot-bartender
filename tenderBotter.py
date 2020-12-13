@@ -1,13 +1,11 @@
 import logging
 
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import (
     Updater,
     CommandHandler,
     MessageHandler,
     CallbackQueryHandler,
-    Filters,
     ConversationHandler,
     CallbackContext,
 )
@@ -18,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # state
-AGE = range(1)
+CHOOSE, RATIO, SHOWING = range(3)
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -40,7 +38,7 @@ def start(update: Update, context: CallbackContext) -> None:
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-    return AGE
+    return CHOOSE
 
 
 def drinkWine(update: Update, context: CallbackContext) -> None:
@@ -52,13 +50,13 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
         keyboard = [
             [
                 InlineKeyboardButton(
-                    "成熟的大人 - 米咖儂", callback_data='成熟的大人 - 米咖儂'),
+                    "成熟的大人 - 米咖儂", callback_data='wine_1'),
             ],
             [
-                InlineKeyboardButton("米蔓天使 - 米蔓", callback_data='米蔓天使 - 米蔓'),
+                InlineKeyboardButton("米蔓天使 - 米蔓", callback_data='wine_2'),
             ],
             [
-                InlineKeyboardButton("少女心 - 米美雪", callback_data='少女心 - 米美雪'),
+                InlineKeyboardButton("少女心 - 米美雪", callback_data='wine_3'),
             ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -72,20 +70,20 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
         keyboard = [
             [
                 InlineKeyboardButton(
-                    "來點氣泡吧 - 雪碧", callback_data='來點氣泡吧 - 雪碧'),
+                    "來點氣泡吧 - 雪碧", callback_data='drink_1'),
             ],
             [
                 InlineKeyboardButton(
-                    "成熟的味道 - 伯朗咖啡", callback_data='成熟的味道 - 伯朗咖啡'),
+                    "成熟的味道 - 伯朗咖啡", callback_data='drink_2'),
             ],
             [
-                InlineKeyboardButton("新鮮純淨 - 牛乳", callback_data='新鮮純淨 - 牛乳'),
+                InlineKeyboardButton("新鮮純淨 - 牛乳", callback_data='drink_3'),
             ],
             [
-                InlineKeyboardButton("酸甜滋味 - 蔓越莓", callback_data='酸甜滋味 - 蔓越莓'),
+                InlineKeyboardButton("酸甜滋味 - 蔓越莓", callback_data='drink_4'),
             ],
             [
-                InlineKeyboardButton("清涼果汁 - 美粒果", callback_data='清涼果汁 - 美粒果'),
+                InlineKeyboardButton("清涼果汁 - 美粒果", callback_data='drink_5'),
             ],
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -94,7 +92,37 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
             text="未滿18歲禁止飲酒，請選擇您的飲品", reply_markup=reply_markup
         )
 
-    return AGE
+    return RATIO
+
+
+def ratio(update: Update, context: CallbackContext) -> None:
+    query = update.callback_query
+
+    if(query.data.find("wine") == 0):
+        keyboard = [
+            [
+                InlineKeyboardButton(
+                    "低濃度", callback_data='low'),
+            ],
+            [
+                InlineKeyboardButton("黃金比例", callback_data='medium'),
+            ],
+            [
+                InlineKeyboardButton("高濃度", callback_data='high'),
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+    query.edit_message_text(
+        text="請選擇您的酒精濃度", reply_markup=reply_markup
+    )
+
+    return SHOWING
+
+
+def show_data(update: Update, context: CallbackContext) -> None:
+
+    return RATIO
 
 
 def main():
@@ -107,9 +135,10 @@ def main():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
-            AGE: [
-                CallbackQueryHandler(drinkWine),
-            ],
+            CHOOSE: [CallbackQueryHandler(drinkWine), ],
+            RATIO: [CallbackQueryHandler(ratio), ],
+            SHOWING: [CallbackQueryHandler(show_data), ]
+
         },
         fallbacks=[CommandHandler('start', start)],
     )
