@@ -1,5 +1,6 @@
 import logging
 import json
+import qrcode
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import (
@@ -103,7 +104,7 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
         query.edit_message_text(
             text="未滿18歲禁止飲酒，請選擇您的飲品", reply_markup=reply_markup
         )
-        return
+        return SHOWING
 
     return RATIO
 
@@ -155,15 +156,15 @@ def show_data(update: Update, context: CallbackContext) -> None:
                   }
     # 濃度字典
 
-    state_ratio = {"regular": "",
+    state_ratio = {"regular": "無酒精成分",
                    "low": "低濃度",
                    "medium": "黃金比例",
                    "high": "高濃度",
                    }
-    print(state_type["wine_1"])
-    print(state_ratio["low"])
+
     query.edit_message_text(
-        text="以下是您選擇的飲品:\n"+"飲品種類:" + "飲品濃度:",
+        text="以下是您選擇的飲品:\n"+"\n飲品種類: " +
+        state_type[data["type"]] + "\n\n飲品濃度: " + state_ratio[data["ratio"]],
     )
 
 
