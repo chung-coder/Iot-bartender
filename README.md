@@ -49,7 +49,7 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 ![](https://i.imgur.com/dfl6llD.png)
 
 1. [Iot-bartender外型](https://www.hackster.io/hackershack/smart-bartender-5c430e)
-   ![](https://imgur.com/5kCiRb9)
+   ![](https://i.imgur.com/5kCiRb9.jpg)
 
 2. Raspberry pi 如何與Telegram Bot串接
 ![](https://i.imgur.com/yG46nxj.png)
