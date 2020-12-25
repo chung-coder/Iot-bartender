@@ -96,6 +96,10 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
         - [Inline keyboard&callback_query](https://ithelp.ithome.com.tw/m/articles/10248455)
     - Python Telegram Bot 教學
         - [參考文件](https://hackmd.io/@truckski/HkgaMUc24?type=view#Python-Telegram-Bot-%E6%95%99%E5%AD%B8-by-%E9%99%B3%E9%81%94%E4%BB%81)
+    - qrcode
+        - 產生QRcode
+            - pip install qrcode[pil]
+        - [傳送照片](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets#post-an-image-from-memory)
 
 ## Plan B
 AI bartender with customization bartending
