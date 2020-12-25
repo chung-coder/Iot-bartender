@@ -1,6 +1,8 @@
 import logging
 import json
 import qrcode
+from PIL import Image
+from io import BytesIO
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import (
@@ -167,6 +169,14 @@ def show_data(update: Update, context: CallbackContext) -> None:
         state_type[data["type"]] + "\n\n飲品濃度: " + state_ratio[data["ratio"]],
     )
 
+    # 產生QRcode並回傳telegram-bot
+    img = qrcode.make(data)
+    bio = BytesIO()
+    bio.name = 'image.png'
+    img.save(bio, 'PNG')
+    bio.seek(0)
+    query.bot.send_photo(chat_id=update.effective_chat.id, photo=bio)
+
 
 def main():
 
@@ -185,7 +195,6 @@ def main():
         },
         fallbacks=[CommandHandler('start', start)],
     )
-
     dispatcher.add_handler(conv_handler)
 
     # Start the Bot
