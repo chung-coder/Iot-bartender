@@ -49,7 +49,7 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 ![](https://i.imgur.com/dfl6llD.png)
 
 1. [Iot-bartender外型](https://www.hackster.io/hackershack/smart-bartender-5c430e)
-
+   ![](https://i.imgur.com/5kCiRb9.jpg)
 
 2. Raspberry pi 如何與Telegram Bot串接
 ![](https://i.imgur.com/yG46nxj.png)
@@ -66,10 +66,14 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
     
     b.	[相關使用手冊](https://www.waveshare.net/w/upload/9/95/Barcode_Scanner_Module_Quick_Start_cn.pdf)
     
+    c.[利用 Web Cam 來讀取條碼](https://atceiling.blogspot.com/2017/03/raspberry-pi-zbar.html )
+    
 3.	如何實作2FA  (Two-factor authentication)
 - Telegram Bot - Age Classification
 
     a.	使用者傳送圖片給telegram bot，telegram bot運用OpenCV年齡辨識，並回傳是否滿18歲的資訊
+        [用 Python 上傳圖片至 Imgur 圖床](https://ithelp.ithome.com.tw/articles/10241006)
+        [ImageDraw繪製圖片框線與文字](https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html)
     
     b.	[OpenCV with Telegram Bot](https://github.com/LincolnUehara/bot-opencv-telegram)
     
@@ -84,6 +88,24 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 4.	Telegram Bot UI設計
 ![](https://i.imgur.com/n2v5UWo.png)
 
+## Implement
+- telegram bot
+    - using [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+    - 基本設定
+        - [參考文件](https://ithelp.ithome.com.tw/articles/10245264)
+    - keyboard
+        - [ReplyKeyboardMarkup](https://ithelp.ithome.com.tw/m/articles/10247929)
+        - [Inline keyboard&callback_query](https://ithelp.ithome.com.tw/m/articles/10248455)
+    - Python Telegram Bot 教學
+        - [參考文件](https://hackmd.io/@truckski/HkgaMUc24?type=view#Python-Telegram-Bot-%E6%95%99%E5%AD%B8-by-%E9%99%B3%E9%81%94%E4%BB%81)
+    - qrcode
+        - 產生QRcode
+            - pip install qrcode[pil]
+        - [傳送照片](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets#post-an-image-from-memory)
+- bartender Bot
+    - 讀取qrcode
+        - pip install pyzbar
+        - [參考文件](https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/)
 ## Plan B
 AI bartender with customization bartending
 ### Overview
