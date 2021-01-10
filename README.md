@@ -72,6 +72,8 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 - Telegram Bot - Age Classification
 
     a.	使用者傳送圖片給telegram bot，telegram bot運用OpenCV年齡辨識，並回傳是否滿18歲的資訊
+        [用 Python 上傳圖片至 Imgur 圖床](https://ithelp.ithome.com.tw/articles/10241006)
+        [ImageDraw繪製圖片框線與文字](https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html)
     
     b.	[OpenCV with Telegram Bot](https://github.com/LincolnUehara/bot-opencv-telegram)
     

@@ -1,10 +1,3 @@
-import logging
-import json
-import qrcode
-from PIL import Image
-from io import BytesIO
-
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import (
     Updater,
     CommandHandler,
@@ -12,7 +5,25 @@ from telegram.ext import (
     CallbackQueryHandler,
     ConversationHandler,
     CallbackContext,
+    Filters
 )
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
+import logging
+import json
+import qrcode
+import cognitive_age as t
+
+from PIL import Image
+from io import BytesIO
+
+# 上傳圖片至 Imgur 圖床
+from datetime import datetime
+from imgurpython import ImgurClient
+import pyimgur
+
+CLIENT_ID = "45849270466ce78"
+PATH = "person_img.jpg"  # A Filepath to an image on your computer"
+title = "Uploaded with PyImgur"
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -25,52 +36,63 @@ CHOOSE, RATIO, SHOWING = range(3)
 
 def start(update: Update, context: CallbackContext) -> None:
 
-    keyboard = [
-        [
-            InlineKeyboardButton(
-                text="是，我滿18歲了!", callback_data="Yes"),
-            InlineKeyboardButton(text="還沒，我未滿18歲", callback_data="No"),
-        ],
-    ]
-
     update.message.reply_text(
         "嗨! 我是Tender Botter，很高興能為您服務!"
     )
 
     update.message.reply_text(
-        "請問您是否已滿18歲?",
-        reply_markup=InlineKeyboardMarkup(keyboard)
+        "請傳送您的照片，已確認您是否已滿18歲",
     )
 
     return CHOOSE
 
 
 def drinkWine(update: Update, context: CallbackContext) -> None:
-    query = update.callback_query
+
+    image_file = context.bot.get_file(update.message.photo[-1].file_id)
+    image_file.download("person_img.jpg")
+    im = Image.open("person_img.jpg")
+    update.message.reply_text("已收到您的照片，開始進行辨識......")
+
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    print(uploaded_image.title)
+    print(uploaded_image.link)
+    age, person_img = t.cognitive_age(uploaded_image.link)
+
+    person_img.save("person_img_age.png")
+    person_img.show()
+
+    context.bot.send_photo(
+        chat_id=update.effective_chat.id, photo=open('person_img_age.png', 'rb'))
 
     # 使用者已成年
-    if query.data == "Yes":
+    if int(age) >= 18:
+
+        update.message.reply_text("已辨識出您的年齡為: " + age + "歲")
 
         keyboard = [
             [
                 InlineKeyboardButton(
-                    "成熟的大人 - 米咖儂", callback_data='wine_1'),
+                    "成熟的大人 - 米咖儂", callback_data="wine_1"),
             ],
             [
-                InlineKeyboardButton("米蔓天使 - 米蔓", callback_data='wine_2'),
+                InlineKeyboardButton("米蔓天使 - 米蔓", callback_data="wine_2"),
             ],
             [
-                InlineKeyboardButton("少女心 - 米美雪", callback_data='wine_3'),
+                InlineKeyboardButton("少女心 - 米美雪", callback_data="wine_3"),
             ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
-        query.edit_message_text(
+        update.message.reply_text(
             text="請選擇您的調酒品項", reply_markup=reply_markup
         )
 
     # 使用者未成年
-    elif query.data == "No":
+    else:
+        update.message.reply_text("已辨識出您的年齡為: " + age + "歲\n未滿18歲，禁止飲酒哦!\n"),
+
         drink_1 = json.dumps(
             {"type": "drink_1", "ratio": "regular"}, indent=4)
         drink_2 = json.dumps(
@@ -103,8 +125,8 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
-        query.edit_message_text(
-            text="未滿18歲禁止飲酒，請選擇您的飲品", reply_markup=reply_markup
+        update.message.reply_text(
+            text="請選擇您的飲品", reply_markup=reply_markup
         )
         return SHOWING
 
@@ -188,14 +210,17 @@ def main():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
-            CHOOSE: [CallbackQueryHandler(drinkWine), ],
-            RATIO: [CallbackQueryHandler(ratio), ],
-            SHOWING: [CallbackQueryHandler(show_data), ]
+
+            CHOOSE: [MessageHandler(Filters.photo, drinkWine)],
+            RATIO: [CallbackQueryHandler(ratio)],
+            SHOWING: [CallbackQueryHandler(show_data)]
 
         },
         fallbacks=[CommandHandler('start', start)],
     )
+
     dispatcher.add_handler(conv_handler)
+    # dispatcher.add_handler(MessageHandler(Filters.photo, cognitive_image))
 
     # Start the Bot
     updater.start_polling()
