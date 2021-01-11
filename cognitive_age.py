@@ -6,10 +6,6 @@ import json
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 
-CLIENT_ID = "45849270466ce78"
-PATH = "person_img.jpg"  # A Filepath to an image on your computer"
-title = "Uploaded with PyImgur"
-
 # set up congnitive_face
 KEY = '2e7f4c8cb6134929bfb79ce5044e8fa6'
 CF.Key.set(KEY)

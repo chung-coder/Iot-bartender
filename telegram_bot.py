@@ -59,6 +59,7 @@ def drinkWine(update: Update, context: CallbackContext) -> None:
     print(uploaded_image.title)
     print(uploaded_image.link)
     age, person_img = t.cognitive_age(uploaded_image.link)
+    update.message.reply_text("辨識中，請稍後......")
 
     person_img.save("person_img_age.png")
     person_img.show()
