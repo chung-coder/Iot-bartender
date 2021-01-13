@@ -16,23 +16,19 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 
 ## Components
 ### Hardward
-- Raspberry Pi 3 Model B *1
-- Intel® Neural Compute Stick 2 *1
-- Arducam Noir Camera for Raspberry Pi *1
-- DHT22 Temperature Humidity Sensor Module *1
-- 4xAA battery holder *2
-- AA battery
+- Raspberry Pi 3 *1
+- Logitech Webcam *1
+- 12V Switching Power Supply *1
 - Jumper wires
 - breadboard
 - 12V DC Dosing Pump Peristaltic *6
-- Food Grade Silicone Tubing *3
+- Food Grade Silicone Tubing *3m
 - 8 Channel DC 5V Relay Module *1
-- Bar code & QR code Scan Module *1
 
 ### Software
 - Python 3.7
 - Open-Vino
-- Telegram
+- Python Telegram Bot
 
 
 ### Accessories
@@ -149,3 +145,6 @@ https://www.learnopencv.com/age-gender-classification-using-opencv-deep-learning
 https://blog.gtwang.org/programming/python-opencv-dlib-face-detection-implementation-tutorial/
 - OpenCV with Telegram Bot
 https://github.com/LincolnUehara/bot-opencv-telegram
+
+## Demo Video
+https://youtu.be/BHtmUCMAgPI
