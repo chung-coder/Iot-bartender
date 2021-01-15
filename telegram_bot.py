@@ -11,6 +11,7 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 import logging
 import json
 import qrcode
+
 import cognitive_age as t
 
 from PIL import Image
@@ -21,7 +22,7 @@ from datetime import datetime
 from imgurpython import ImgurClient
 import pyimgur
 
-CLIENT_ID = "45849270466ce78"
+CLIENT_ID = "YOUR CLIENT ID"
 PATH = "person_img.jpg"  # A Filepath to an image on your computer"
 title = "Uploaded with PyImgur"
 
@@ -204,7 +205,7 @@ def show_data(update: Update, context: CallbackContext) -> None:
 def main():
 
     updater = Updater(
-        "1202208172:AAFdfP6gj-fgaRVO3t6nhvek7B7mXQPOMZQ", use_context=True)
+        "YOUR TOKEN HERE", use_context=True)
 
     dispatcher = updater.dispatcher
 
