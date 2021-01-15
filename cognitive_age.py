@@ -7,11 +7,11 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 
 # set up congnitive_face
-KEY = 'subscription key'
+KEY = 'SUBSCRIPTION KEY'
 CF.Key.set(KEY)
 
 # Replace with your regional Base URL
-BASE_URL = 'https://southcentralus.api.cognitive.microsoft.com/face/v1.0/'
+BASE_URL = 'https://REGIONAL.api.cognitive.microsoft.com/face/v1.0/'
 CF.BaseUrl.set(BASE_URL)
 
 
