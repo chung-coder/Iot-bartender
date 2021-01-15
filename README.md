@@ -2,16 +2,16 @@
 ![](https://i.imgur.com/jgNbMPh.png)
 
 ## Overview
-This is an **AI bartender with Secondary verification**. Because of the working holiday in Orchid Island during the summer vacation, I want to share Original Cocktail that I met in this summer through this project.
+This is an **AI bartender with Age verification**. Because of the working holiday in Orchid Island during the summer vacation, I want to share Original Cocktail that I met in this summer through this project.
 To implement this project, I would use five drinks and rice wine. As for user, there are three steps to operate.
 
 a.	First, user need to offer their selfie to identify age. If their age is less than 18 years old, they cannot choose rice wine as a component of drinks.
 
 b.	Second, user need to choose the drinks what they like and the proportion what they want on their mobile device. 
 
-c.	Third, the mobile device will generate an qr-code and user can use it to pick their drink. When they pick up their drink, AI bartender will take a photo to verify identity.
+c.	Third, the mobile device will generate an qr-code and user can use it to pick their drink.
 
-![](https://i.imgur.com/3xwcXHw.png)
+![](https://i.imgur.com/cbIxT6t.png)
 
 
 ## Components
@@ -24,6 +24,7 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 - 12V DC Dosing Pump Peristaltic *6
 - Food Grade Silicone Tubing *3m
 - 8 Channel DC 5V Relay Module *1
+- power cable *1
 
 ### Software
 - Python 3.7
@@ -32,119 +33,166 @@ c.	Third, the mobile device will generate an qr-code and user can use it to pick
 
 
 ### Accessories
-
 - 紅標米酒
 - 雪碧
 - 國農牛乳
 - 伯朗咖啡
 - 蔓越莓汁
 - 美粒果
- 
-## My survey on the project
 
-![](https://i.imgur.com/dfl6llD.png)
 
-1. [Iot-bartender外型](https://www.hackster.io/hackershack/smart-bartender-5c430e)
-   ![](https://i.imgur.com/5kCiRb9.jpg)
+## Circuit Diagram
+![](https://i.imgur.com/QBvCgU7.png)
 
-2. Raspberry pi 如何與Telegram Bot串接
+Didn’t put webcam on the circuit diagram!
+
+Just plug them in your raspberry pi. It’s simple!
+
+## How does Iot-bartender really look like
+
+   ![](https://i.imgur.com/W03h3U5.jpg)
+   
+   ![](https://i.imgur.com/Ry2dcOi.jpg)
+
+## Telegram Bot UI設計
+![](https://i.imgur.com/i0inCYF.png)
+
+## System Diagram on this project
+
+![](https://i.imgur.com/KXtfexU.png)
+
+## Demo Video
+https://youtu.be/BHtmUCMAgPI
+
+## Before Getting Start
+The first thing to do is to build the environment on your Raspberry Pi. Go to Terminal and enter:
+
+
+```
+sudo apt-get install libzbar0
+pip install pyzbar
+pip install RPi.GPIO
+pip install opencv-python
+```
+To get more infomation about opencv-python, you can go to
+https://docs.opencv.org/3.4.1/d2/de6/tutorial_py_setup_in_ubuntu.html
+
+In order to create your telegram bot, you need to build the environment on your computer. Go to Terminal and enter:
+```
+pip install python-telegram-bot --upgrade
+pip install cognitive_face
+pip install pyimgur
+pip install Pillow
+pip install qrcode
+```
+## Build up your Telegram Bot
+1. Download Telegram on your computer,then sign up for Telegram
+https://telegram.org/apps
+![](https://d1dwq032kyr03c.cloudfront.net/upload/images/20200926/20130283oUk4njEXco.png)
+2. Use [@BotFather](https://t.me/BotFather) to create new bot accounts and manage your existing bots
+![](https://miro.medium.com/max/698/1*oelrrJ132Ta6sp91Xo-xEQ.png)
+4. Click these links to learn how to set your telegram bot
+- https://ithelp.ithome.com.tw/articles/10245264
+- https://hackmd.io/@truckski/HkgaMUc24?type=view#Python-Telegram-Bot-%E6%95%99%E5%AD%B8-by-%E9%99%B3%E9%81%94%E4%BB%81
+
+4. Input your token on the script "**YOUR TOKEN HERE**".
+
+	Notice: You need to keep your token and store it safely.
+```
+updater = Updater("YOUR TOKEN HERE", use_context=True)
+```
+
+5. To upload image and get the url, register your application with Imgur.
+![](https://i.imgur.com/JjquTA8.png)
+
+6. Go to [Register your application](![](https://api.imgur.com/oauth2/addclient)
+) to register your client. Then you will get your Client ID and Client secret
+
+7. Input your CLIENT_ID on the script "**YOUR CLIENT ID**", then you can use PyImgur to upload the image
+```
+CLIENT_ID = "YOUR CLIENT ID"
+PATH = "person_img.jpg"  # A Filepath to an image on your computer"
+title = "Uploaded with PyImgur"
+```
+
+```
+im = pyimgur.Imgur(CLIENT_ID)
+uploaded_image = im.upload_image(PATH, title=title)
+print(uploaded_image.title)
+print(uploaded_image.link)
+```
+
+To get more infomation, you can go to [PyImgur](https://pyimgur.readthedocs.io/en/latest/)
+
+
+8. Before using Face API to cognitive the age, you need to register your application with microsoft azure.
+Click 
+[Azure subscription](https://azure.microsoft.com/zh-tw/free/cognitive-services/) to Create account for free
+
+![](https://azurecomcdn.azureedge.net/cvt-501c9a38819bd9ffc1ed855f2ed8b5db5e8936aed3e3a6732ff13f313a6c0ca4/images/page/free/portal-home-alt.png)
+
+9. Once you have your Azure subscription, [create a Face resource](https://portal.azure.com/#create/Microsoft.CognitiveServicesFace) in the Azure portal to get your key and endpoint.
+
+10. Input your SUBSCRIPTION KEY  and REGIONAL on the script "**SUBSCRIPTION KEY**" and "**REGIONAL**"
+```
+# set up congnitive_face
+KEY = 'SUBSCRIPTION KEY'
+CF.Key.set(KEY)
+
+# Replace with your regional Base URL
+BASE_URL = 'https://REGIONAL.api.cognitive.microsoft.com/face/v1.0/'
+CF.BaseUrl.set(BASE_URL)
+```
+
+To get more infomation, you can go to [Quickstart: Use the Face client library](https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/client-libraries?tabs=visual-studio&pivots=programming-language-python)
+
+
+12. Run the script
+```
+python telegram_bot.py
+```
+## Build up your Iot Bartender
+1. Make sure that all electronic component can work normally
+![](https://i.imgur.com/zCsALGT.png)
+
+
+3. Set up your circuit diagram first, and make sure that all electronic component has been installed.
+![](https://i.imgur.com/rHljPYQ.jpg)
+
+
+3. Using `camera.py` to scan and decode QR codes with OpenCV
 ![](https://i.imgur.com/yG46nxj.png)
-- Telegram Bot 產生QR-code
 
-    a.	使用Python packages - [qrcode 6.1](https://pypi.org/project/qrcode/)
-    Install: pip install qrcode
-    
-    b.	Generate and Decode QR Codes in Python document
-    
-- Raspberry pi掃描QR-code
+    To get more infomation, you can go to [An OpenCV barcode and QR code scanner with ZBar](https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/)
 
-    a.	使用[Barcode Scanner Module](https://www.meiyagroup.com.tw/product/bar-code-qr-code-%E6%8E%83%E6%8F%8F%E8%BE%A8%E8%AD%98%E6%A8%A1%E7%B5%84/)掃描辨識模組
-    
-    b.	[相關使用手冊](https://www.waveshare.net/w/upload/9/95/Barcode_Scanner_Module_Quick_Start_cn.pdf)
-    
-    c.[利用 Web Cam 來讀取條碼](https://atceiling.blogspot.com/2017/03/raspberry-pi-zbar.html )
-    
-3.	如何實作2FA  (Two-factor authentication)
-- Telegram Bot - Age Classification
-
-    a.	使用者傳送圖片給telegram bot，telegram bot運用OpenCV年齡辨識，並回傳是否滿18歲的資訊
-        [用 Python 上傳圖片至 Imgur 圖床](https://ithelp.ithome.com.tw/articles/10241006)
-        [ImageDraw繪製圖片框線與文字](https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html)
-    
-    b.	[OpenCV with Telegram Bot](https://github.com/LincolnUehara/bot-opencv-telegram)
-    
-    c.	[Age Classification using OpenCV](https://www.learnopencv.com/age-gender-classification-using-opencv-deep-learning-c-python/)
-
-- Raspberry Pi - Face Verification
-
-    a.將使用者傳送給telegram bot的圖片存在QR-code內，並運用Raspberry Pi拍照識別與OpenCV、OpenVINO以驗證使用者是否為同一人
-    
-    b.	[參考門禁系統](https://www.instructables.com/DIY-Smart-Home-Doorbell-for-Less-Than-40/?fbclid=IwAR0vGymv65HD6OJxYTl0NFnVB5m_F3yMyNyrp4spA1Qm_s4IXwan-3XveR0)、[人臉辨識解析](https://medium.com/coding-like-coffee/%E4%BA%BA%E8%87%89%E8%BE%A8%E8%AD%98-face-recognition-cffcec53a544)
-
-4.	Telegram Bot UI設計
-![](https://i.imgur.com/n2v5UWo.png)
-
-## Implement
-- telegram bot
-    - using [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
-    - 基本設定
-        - [參考文件](https://ithelp.ithome.com.tw/articles/10245264)
-    - keyboard
-        - [ReplyKeyboardMarkup](https://ithelp.ithome.com.tw/m/articles/10247929)
-        - [Inline keyboard&callback_query](https://ithelp.ithome.com.tw/m/articles/10248455)
-    - Python Telegram Bot 教學
-        - [參考文件](https://hackmd.io/@truckski/HkgaMUc24?type=view#Python-Telegram-Bot-%E6%95%99%E5%AD%B8-by-%E9%99%B3%E9%81%94%E4%BB%81)
-    - qrcode
-        - 產生QRcode
-            - pip install qrcode[pil]
-        - [傳送照片](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets#post-an-image-from-memory)
-- bartender Bot
-    - 讀取qrcode
-        - pip install pyzbar
-        - [參考文件](https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/)
-## Plan B
-AI bartender with customization bartending
-### Overview
-This plan will be similar to the original plan. The difference is that it will cancel the feature of Secondary verification.
+4. Run the script
+```
+python iotbartender.py
+```
 
 ## References
-a.	Bartender-pi
+a.	iot Bartender
 - Smart Bartender
 https://www.hackster.io/hackershack/smart-bartender-5c430e
-- 用 Arduino DIY 自動調酒機
-https://arduino.nxez.com/2018/01/16/6-shooter-arduino-drink-mixing-station.html
-- cocktail-pi
-https://github.com/saubury/cocktail-pi
-- Raspberry Pi Off-World Bartender
-https://www.raspberrypi.org/blog/raspberry-pi-off-world-bartender/
 - Pitender
 https://hackmd.io/@nI3k8IIMTUuNhfYnYiVKlQ/rklX1RllU
 - 原住民調酒
 http://winelist.niusnews.com/post/3k2kt84
 
 b.	telegram bot
-- 設定telegram bot on raspberry-pi
-https://www.instructables.com/Set-up-Telegram-Bot-on-Raspberry-Pi/
-- Chatbot with raspberry-pi
-https://github.com/The-Assembly/Home_automation_chatbot
+
 - telegram bot api
 https://core.telegram.org/bots/api
-https://medium.com/front-end-augustus-study-notes/telegram-bot-api-1-e4ea74d3b064
+- python-telegram-bot
+    
+    https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/README.md
 - python QR Code generator
 https://pypi.org/project/qrcode/
-https://github.com/lincolnloop/python-qrcode
-- python QR Code generate and decode
-https://medium.com/better-programming/how-to-generate-and-decode-qr-codes-in-python-a933bce56fd0
-- telegram bot opencv
-https://github.com/meinside/telegram-bot-opencv
+- upload image via PyImgur
+    - https://pyimgur.readthedocs.io/en/latest/
+    - https://ithelp.ithome.com.tw/articles/10241006
 
 c.	Age Classification
-- Gender & Age Classification using OpenCV Deep Learning
-https://www.learnopencv.com/age-gender-classification-using-opencv-deep-learning-c-python/
-- OpenCV using Python
-https://blog.gtwang.org/programming/python-opencv-dlib-face-detection-implementation-tutorial/
-- OpenCV with Telegram Bot
-https://github.com/LincolnUehara/bot-opencv-telegram
+- microsoft azure face api
 
-## Demo Video
-https://youtu.be/BHtmUCMAgPI
+    https://azure.microsoft.com/zh-tw/services/cognitive-services/face/#features
