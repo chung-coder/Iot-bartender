@@ -61,8 +61,7 @@ Just plug them in your raspberry pi. It’s simple!
 
 ![](https://i.imgur.com/KXtfexU.png)
 
-## Demo Video
-https://youtu.be/BHtmUCMAgPI
+## [Click here! Demo Video](https://youtu.be/BHtmUCMAgPI)
 
 ## Before Getting Start
 The first thing to do is to build the environment on your Raspberry Pi. Go to Terminal and enter:
