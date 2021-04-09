@@ -5,11 +5,11 @@
 This is an **AI bartender with Age verification**. Because of the working holiday in Orchid Island during the summer vacation, I want to share Original Cocktail that I met in this summer through this project.
 To implement this project, I would use five drinks and rice wine. As for user, there are three steps to operate.
 
-a.	First, user need to offer their selfie to identify age. If their age is less than 18 years old, they cannot choose rice wine as a component of drinks.
+a.	First, users need to offer their selfie to identify age. If their age is less than 18 years old, they cannot choose rice wine as a component of drinks.
 
-b.	Second, user need to choose the drinks what they like and the proportion what they want on their mobile device. 
+b.	Second, users need to choose the drinks what they like and the proportion what they want on their mobile device. 
 
-c.	Third, the mobile device will generate an qr-code and user can use it to pick their drink.
+c.	Third, the mobile device will generate an qr-code and users can use it to pick their drink.
 
 ![](https://i.imgur.com/cbIxT6t.png)
 
