@@ -11,6 +11,9 @@ b.	Second, users need to choose the drinks what they like and the proportion wha
 
 c.	Third, the mobile device will generate an qr-code and users can use it to pick their drink.
 
+## [Click Here! Demo Video](https://youtu.be/BHtmUCMAgPI)
+
+
 ![](https://i.imgur.com/cbIxT6t.png)
 
 
@@ -60,8 +63,6 @@ Just plug them in your raspberry pi. It’s simple!
 ## System Diagram on this project
 
 ![](https://i.imgur.com/KXtfexU.png)
-
-## [Demo Video](https://youtu.be/BHtmUCMAgPI)
 
 ## Before Getting Start
 The first thing to do is to build the environment on your Raspberry Pi. Go to Terminal and enter:
