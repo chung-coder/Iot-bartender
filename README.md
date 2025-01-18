@@ -1,15 +1,17 @@
 # IoT-bartender
-![](https://i.imgur.com/jgNbMPh.png)
+<p align="center">
+  <img src="https://i.imgur.com/jgNbMPh.png" alt="logo" width="300"/>
+</p>
 
 ## Overview
 This is an **AI bartender with Age verification**. Because of the working holiday in Orchid Island during the summer vacation, I want to share Original Cocktail that I met in this summer through this project.
 To implement this project, I would use five drinks and rice wine. As for user, there are three steps to operate.
 
-a.	First, users need to offer their selfie to identify age. If their age is less than 18 years old, they cannot choose rice wine as a component of drinks.
+a. First, users need to offer their selfie to identify age. If their age is less than 18 years old, they cannot choose rice wine as a component of drinks.
 
-b.	Second, users need to choose the drinks what they like and the proportion what they want on their mobile device. 
+b. Second, users need to choose the drinks what they like and the proportion what they want on their mobile device. 
 
-c.	Third, the mobile device will generate an qr-code and users can use it to pick their drink.
+c. Third, the mobile device will generate an qr-code and users can use it to pick their drink.
 
 ## [Click Here! Demo Video](https://youtu.be/BHtmUCMAgPI)
 
@@ -34,35 +36,35 @@ c.	Third, the mobile device will generate an qr-code and users can use it to pic
 - Open-Vino
 - Python Telegram Bot
 
-
 ### Accessories
-- 紅標米酒
-- 雪碧
-- 國農牛乳
-- 伯朗咖啡
-- 蔓越莓汁
-- 美粒果
-
+- Red Label Rice Wine 紅標米酒
+- Sprite 雪碧
+- Golong Milk 國農牛乳
+- Mr. Brown Coffee 伯朗咖啡
+- Cranberry Juice 蔓越莓汁
+- Minute Maid 美粒果
 
 ## Circuit Diagram
-![](https://i.imgur.com/QBvCgU7.png)
+<img src="https://i.imgur.com/QBvCgU7.png" alt="circuit diagram"  width="800"/>
 
 Didn’t put webcam on the circuit diagram!
 
 Just plug them in your raspberry pi. It’s simple!
 
 ## How does Iot-bartender really look like
+<p align="center">
+	<img src="https://i.imgur.com/W03h3U5.jpg" alt="device1"  width="500"/>
+	<img src="https://i.imgur.com/Ry2dcOi.jpg" alt="device2"  width="500"/>
+</p>
 
-   ![](https://i.imgur.com/W03h3U5.jpg)
-   
-   ![](https://i.imgur.com/Ry2dcOi.jpg)
 
-## Telegram Bot UI設計
-![](https://i.imgur.com/i0inCYF.png)
+
+## Telegram Bot User Interface Design
+![](https://imgur.com/xKKvm72.jpg)
 
 ## System Diagram on this project
 
-![](https://i.imgur.com/KXtfexU.png)
+![](https://imgur.com/9shbXYP.jpg)
 
 ## Before Getting Start
 The first thing to do is to build the environment on your Raspberry Pi. Go to Terminal and enter:
@@ -155,13 +157,11 @@ python telegram_bot.py
 1. Make sure that all electronic component can work normally
 ![](https://i.imgur.com/zCsALGT.png)
 
-
-3. Set up your circuit diagram first, and make sure that all electronic component has been installed.
-![](https://i.imgur.com/rHljPYQ.jpg)
-
+2. Set up your circuit diagram first, and make sure that all electronic component has been installed.
+<img src="https://imgur.com/gChkAEr.jpg" alt="circuit diagram"  width="600"/>
 
 3. Using `camera.py` to scan and decode QR codes with OpenCV
-![](https://i.imgur.com/yG46nxj.png)
+![](https://imgur.com/gb8nn9B)
 
     To get more infomation, you can go to [An OpenCV barcode and QR code scanner with ZBar](https://www.pyimagesearch.com/2018/05/21/an-opencv-barcode-and-qr-code-scanner-with-zbar/)
 
@@ -171,28 +171,26 @@ python iotbartender.py
 ```
 
 ## References
-a.	iot Bartender
+a. iot Bartender
 - Smart Bartender
 https://www.hackster.io/hackershack/smart-bartender-5c430e
 - Pitender
 https://hackmd.io/@nI3k8IIMTUuNhfYnYiVKlQ/rklX1RllU
-- 原住民調酒
+- Taiwanese Indigenous Cocktail
 http://winelist.niusnews.com/post/3k2kt84
 
-b.	telegram bot
+b. telegram bot
 
 - telegram bot api
 https://core.telegram.org/bots/api
 - python-telegram-bot
-    
-    https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/README.md
+https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/README.md
 - python QR Code generator
 https://pypi.org/project/qrcode/
 - upload image via PyImgur
     - https://pyimgur.readthedocs.io/en/latest/
     - https://ithelp.ithome.com.tw/articles/10241006
 
-c.	Age Classification
+c. Age Classification
 - microsoft azure face api
-
-    https://azure.microsoft.com/zh-tw/services/cognitive-services/face/#features
+https://azure.microsoft.com/zh-tw/services/cognitive-services/face/#features
