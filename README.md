@@ -53,8 +53,8 @@ Just plug them in your raspberry pi. It’s simple!
 
 ## How does Iot-bartender really look like
 <p align="center">
-	<img src="https://i.imgur.com/W03h3U5.jpg" alt="device1"  width="500"/>
-	<img src="https://i.imgur.com/Ry2dcOi.jpg" alt="device2"  width="500"/>
+	<img src="https://i.imgur.com/W03h3U5.jpg" alt="device1" width="400"/>
+	<img src="https://i.imgur.com/Ry2dcOi.jpg" alt="device2" width="400"/>
 </p>
 
 
